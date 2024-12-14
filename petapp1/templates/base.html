@@ -11,9 +11,9 @@
 
 	<body>
         
-        <nav class="navbar navbar-light navbar-expand-lg" style="background-color: lightgreen;">
+        <nav class="navbar navbar-light navbar-expand-lg" style="background-color: rgb(56, 5, 5);">
             <div class="container">
-                <a class="navbar-brand" href="#">Pet Store</a>
+                <a class="navbar-brand text-white" href="#">Pet Store</a>
                 <button type="button" class="navbar-toggler" data-target="#navbarNav" 
                 data-toggle="collapse" aria-controls="navbarNav" aria-expanded="false">
                     <span class="navbar-toggler-icon"></span>
@@ -21,28 +21,47 @@
                 <div class="navbar navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        <a class="nav-link text-white" href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">About Us</a>
+                        <a class="nav-link text-white" href="{% url 'about' %}" class="text-white">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Contact</a>
+                        <a class="nav-link text-white" href="{% url 'contact' %}" class="text-white">Contact</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'pet_list' %}">Pets</a> <!-- Link to Pet List -->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'product_list' %}">Products</a> <!-- Link to Product List -->
+                    </li>
+                    {% if user.is_staff %}
+                    <!-- Admin links -->
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'create_pet' %}">Create Pet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'create_product' %}">Create Product</a>
+                    </li>
+                    <li>
+                        <a class="nav-link text-white" href="{% url 'create_user' %}">Create User</a>
+                    </li>
+                {% endif %}
                     <li class="nav-item">
                         {% if user.is_authenticated %}
                             <form class="form" action="{% url 'logout' %}" method="post">
                                 {% csrf_token %}
-                                <button class="btn btn-primary" type="submit">Logout</button>
+                                <button class="btn btn-primary mr-3" type="submit">Logout</button>
                             </form>   
                         {% else %}
-                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                            <a class="nav-link text-white mr-3" href="{% url 'login' %}">Login</a>
                         {% endif %}
                     </li>
+                    
                 </ul>
                 <form class="form-inline">
                     <input type="search" class="form-control mr-3"/>
-                    <button type="submit" class="btn btn-outline-success">Search</button>
+                    <button type="submit" class="btn btn-outline-primary">Search</button>
                 </form>
                 </div>
             </div>
@@ -53,13 +72,46 @@
             {% endblock %}
         </div>
 
-        <footer class="footer-custom text-center py-2">
+        <footer class="footer-custom text-white py-4" style="background-color: rgb(56, 5, 5);">
             <div class="container">
-                <p>&copy; 2024 Petstore Project | All Rights Reserved</p>
-            </div>
-            <div>
-                <i class="bi-facebook"></i>
-                
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5>Quick Links</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="{% url 'home' %}" class="text-white">Home</a></li>
+                            <li><a href="{% url 'pet_list' %}" class="text-white">Pets</a></li>
+                            <li><a href="{% url 'about' %}" class="text-white">About Us</a></li>
+                            <li><a href="{% url 'contact' %}" class="text-white">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h5>Customer Service</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="{% url 'privacy_policy' %}" class="text-white">Privacy Policy</a></li>
+                            <li><a href="{% url 'terms' %}" class="text-white">Terms of Service</a></li>
+                            <li><a href="{% url 'faq' %}" class="text-white">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h5>Follow Us</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="https://facebook.com" class="text-white">Facebook</a></li>
+                            <li><a href="https://twitter.com" class="text-white">Twitter</a></li>
+                            <li><a href="https://instagram.com" class="text-white">Instagram</a></li>
+                            <li><a href="https://youtube.com" class="text-white">YouTube</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h5>Contact Us</h5>
+                        <ul class="list-unstyled">
+                            <li>Email: <a href="mailto:info@petstore.com" class="text-white">info@petstore.com</a></li>
+                            <li>Phone: <a href="tel:+1234567890" class="text-white">+1 234 567 890</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <p>&copy; 2024 Petstore Project | All Rights Reserved</p>
+                </div>
             </div>
         </footer>
 

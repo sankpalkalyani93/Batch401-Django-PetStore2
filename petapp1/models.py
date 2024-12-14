@@ -7,10 +7,12 @@ from django.contrib.auth.models import AbstractUser
 class PetUser(AbstractUser):
     fname = models.CharField(max_length=30)
     lname = models.CharField(max_length=30)
-    #username1 = models.CharField(max_length=20)
     email1 = models.CharField(max_length=50)
     phone1 = models.CharField(max_length=14)
     address1 = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.username
 
 class Pet(models.Model):
     name = models.CharField(max_length=20, validators=[RegexValidator(regex=r'^[a-zA-Z\s]+$', message=("Name can contain only alphabets and spaces"), code="invalid_name")])
@@ -20,6 +22,13 @@ class Pet(models.Model):
     type = models.CharField(max_length=10)
     description = models.CharField(max_length=100)
     image = models.ImageField(upload_to='pet_images/', blank=True, null=True)
+
+    # adding certain permission 
+    class Meta:
+        permissions = [
+            ('can_add_pet', 'Can add a pet'), 
+            ('can_update_pet', 'Can update a pet')
+        ]
 
 class Product(models.Model):
     product_name = models.CharField(max_length=20, validators=[RegexValidator(regex=r'^[a-zA-Z\s]+$', message=("Product Name can contain only alphabets and spaces"), code="invalid_product_name")])

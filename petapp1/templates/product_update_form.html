@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block content%}
+        <h2>Update a Product</h2>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-primary m-2">Add a Pet</button>
+            <button type="submit">Edit</button>
         </form>
 {% endblock %}
